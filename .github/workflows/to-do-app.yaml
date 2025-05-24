@@ -3,7 +3,7 @@ name: TO DO App Deployment CI
 on:
     pull_request:
         branches:
-            - main
+            - master
 
 jobs:
     Code-Quality:
