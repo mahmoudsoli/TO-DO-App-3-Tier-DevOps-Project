@@ -84,7 +84,7 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./src
+          context: ./src/frontend
           file: ./src/frontend/Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_USERNAME }}/to-do-front-service:${{ github.run_id }}
@@ -103,7 +103,7 @@ jobs:
         if: success()
         uses: docker/build-push-action@v4
         with:
-          context: ./src
+          context: ./src/frontend
           file: ./src/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/to-do-front-service:${{ github.run_id }}
