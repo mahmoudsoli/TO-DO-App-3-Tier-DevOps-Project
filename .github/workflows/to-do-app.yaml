@@ -7,31 +7,31 @@ on:
 
 jobs:
     Code-Quality:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
 
-    - name: Install Dependencies
-      working-directory: ./src/backend
-      run: npm install
+        - name: Install Dependencies
+          working-directory: ./src/backend
+          run: npm install
 
-    - name: Run code coverage
-      working-directory: ./src/backend
-      id: code-coverage
-      run: npm test -- --coverage
+        - name: Run code coverage
+          working-directory: ./src/backend
+          id: code-coverage
+          run: npm test -- --coverage
 
-    - name: Upload code coverage results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: code-coverage-results
-        path: ./src/backend/coverage/lcov.info
+        - name: Upload code coverage results
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: code-coverage-results
+            path: ./src/backend/coverage/lcov.info
 
     Unit-Tests:
         runs-on: ubuntu-latest
