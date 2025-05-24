@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: msoliman427/to-do-back-service:15231334153
+        image: msoliman427/to-do-back-service:15231802535
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
