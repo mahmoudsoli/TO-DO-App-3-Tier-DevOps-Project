@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: three-tier
   labels:
     role: api
     env: demo
