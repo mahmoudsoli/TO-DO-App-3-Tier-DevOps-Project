@@ -8,32 +8,32 @@ on:
 
 jobs:
     Code-Quality:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v2
-            
-            - name: Set up Node.js
-              uses: actions/setup-node@v2
-              with:
-                node-version: '14'
-            
-            - name: Install Dependencies
-              working-directory: ./src/backend
-              run: npm install
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
-            - name: Run code coverage
-              working-directory: ./src/backend
-              id: code-coverage
-              run: npm run coverage
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-            - name: Upload code coverage results
-              if: steps.code-coverage.outcome == 'failure' || steps.code-coverage.outcome == 'success'
-              uses: actions/upload-artifact@v4
-              with:
-                name: code-coverage-results
-                path: ./src/backend/coverage/lcov.info  
-                
+    - name: Install Dependencies
+      working-directory: ./src/backend
+      run: npm install
+
+    - name: Run code coverage
+      working-directory: ./src/backend
+      id: code-coverage
+      run: npm test -- --coverage
+
+    - name: Upload code coverage results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage-results
+        path: ./src/backend/coverage/lcov.info
+
     Unit-Tests:
         runs-on: ubuntu-latest
         steps:
@@ -47,7 +47,9 @@ jobs:
             
             - name: Install Dependencies
               working-directory: ./src/backend
-              run: npm install
+              run: |
+                npm install
+                npm install --save-dev jest
 
             - name: Run Unit Tests
               working-directory: ./src/backend
