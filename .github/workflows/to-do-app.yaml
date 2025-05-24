@@ -150,3 +150,25 @@ jobs:
                 file: ./src/backend/Dockerfile
                 push: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/to-do-back-service:${{ github.run_id }}
+    
+    Update-Github-Deployment:
+        runs-on: ubuntu-latest
+        needs: [ Build-scan-and-Push-BackEnd-Image, Build-scan-and-Push-FrontEnd-Image]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+              
+            - name: Update K8S deployment file
+              run: |
+                sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/to-do-back-service:${{ github.run_id }}|" K8S/Backend/deployment.yaml
+                sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/to-do-front-service:${{ github.run_id }}|" K8S/Frontend/deployment.yaml
+            
+            - name: Commit changes
+              run: |
+                git config --global user.email "mahmoudsoliman427@gmail.com"
+                git config --global user.name "mahmoudsoli"
+                git add K8S/Backend/deployment.yaml K8S/Frontend/deployment.yaml
+                git commit -m "[CI] Update deployment image"
+                git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mahmoudsoli/TODO-App.git HEAD:master -f
