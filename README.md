@@ -1,7 +1,6 @@
-## Three-Tier Web Application Deployment on AWS EKS using AWS EKS, ArgoCD, Prometheus, Grafana, Jenkins, OpenLens and Terraform
+## Three-Tier Web Application Deployment on AWS EKS using AWS EKS, ArgoCD, Prometheus, Grafana, OpenLens and Terraform
 [![LinkedIn](https://img.shields.io/badge/Connect%20with%20me%20on-LinkedIn-blue.svg)](https://www.linkedin.com/in/mahmoud-soliman427/)
 [![GitHub](https://img.shields.io/github/stars/AmanPathak-DevOps.svg?style=social)](https://github.com/mahmoudsoli)
-
 
 Welcome to the Three-Tier Web Application Deployment project! 🚀
 
