@@ -1,9 +1,8 @@
 name: TO DO App Deployment CI
 
 on:
-  pull_request:
-    branches:
-      - master
+  
+  workflow_dispatch:
 
 jobs:
   Code-Quality:
