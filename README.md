@@ -1,4 +1,4 @@
-# Three-Tier Web Application Deployment on AWS EKS using AWS EKS, ArgoCD, Prometheus, Grafana, Jenkins, OpenLens and Terraform
+## Three-Tier Web Application Deployment on AWS EKS using AWS EKS, ArgoCD, Prometheus, Grafana, Jenkins, OpenLens and Terraform
 [![LinkedIn](https://img.shields.io/badge/Connect%20with%20me%20on-LinkedIn-blue.svg)](https://www.linkedin.com/in/mahmoud-soliman427/)
 [![GitHub](https://img.shields.io/github/stars/AmanPathak-DevOps.svg?style=social)](https://github.com/mahmoudsoli)
 
@@ -41,8 +41,8 @@ The `K8S` directory holds Kubernetes manifests for deploying your application on
 
 📈 **The journey covered everything from setting up tools to deploying a Three-Tier app, ensuring data persistence, and implementing CI/CD pipelines.**
 
-## Getting Started
-## Infrastructure Setup with Terraform
+### Getting Started
+## ✅ Infrastructure Setup with Terraform
 The infrastructure was provisioned using Terraform with the modules approach, which provides better reusability and modularization.
 
 Created Components: VPC (with public/private subnets, route tables, IGW, etc.) and EKS Cluster with worker nodes
@@ -55,20 +55,20 @@ terraform apply
 ```
 Each major component like vpc, eks, and node_groups was defined in separate modules and then invoked in the root main.tf.
 
-## Continuous Integration (CI) Pipeline
+## ✅ Continuous Integration (CI) Pipeline
 A Git-based CI pipeline was implemented to ensure code security and quality before deployment.
 
 # Tools Used:
-# ✅ GitLeaks
+#  GitLeaks
 Purpose: Detect secrets and sensitive data committed in code (e.g., API keys, tokens).
 Integration: It runs during the CI stage to prevent any hardcoded secrets from being pushed to the repo.
 
-# ✅ Trivy
+#  Trivy
 Purpose: Scan Docker images for known vulnerabilities (CVEs), misconfigurations, and exposed secrets.
 Integration: It scans the built container image before pushing it to the registry.
 
 
-## Set Up the AWS Load Balancer Controller on an Amazon EKS cluster
+## ✅ Set Up the AWS Load Balancer Controller on an Amazon EKS cluster
 First you need to update the kubeconfig
 ```sh
 aws eks update-kubeconfig --region us-east-1 --name otel-cluster
@@ -112,7 +112,7 @@ eksctl get iamserviceaccount \
   --namespace=kube-system
 ```
 
-# Install the AWS Load Balancer Controller with Helm
+# ✅ Install the AWS Load Balancer Controller with Helm
 Complete the following steps:
 
 1. To add the Amazon EKS chart to Helm, run the following command:
@@ -142,7 +142,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 
-# Argo CD Installation with Helm
+# ✅ Argo CD Installation with Helm
 Argo CD was installed via Helm for GitOps-based continuous delivery.
 
 Helm Installation Commands:
@@ -176,7 +176,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 
-## Install Prmethues and Grafana
+## ✅ Install Prmethues and Grafana
 Adding helm repo
 ```sh
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts 
@@ -208,11 +208,5 @@ for grafana
 kubectl port-forward -n monitoring pod/monitoring-grafana-5c548d845b-5p77w 3000:3000
 http://localhost:3000
 ```
-
-
-We welcome contributions! If you have ideas for enhancements or find any issues, please open a pull request or file an issue.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
 
 Happy Coding! 🚀
